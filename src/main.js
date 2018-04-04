@@ -14,9 +14,9 @@ export default {
     pages: ['pages/logs/main', '^pages/index/main'],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
+      navigationBarBackgroundColor: '#3B337C',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: '#fff'
     }
   }
 }

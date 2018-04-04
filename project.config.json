@@ -20,13 +20,36 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 2,
+			"list": [
+				{
+					"id": 0,
+					"name": "开始测验",
+					"pathName": "pages/start/main",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "catalog",
+					"pathName": "pages/catalog/main",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "matching",
+					"pathName": "pages/matching/main",
+					"query": ""
+				}
+			]
 		}
 	}
 }

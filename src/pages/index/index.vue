@@ -1,6 +1,5 @@
 <template>
   <div class="container" @click="clickHandle('test click', $event)">
-
     <div class="userinfo" @click="bindViewTap">
       <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
       <div class="userinfo-nickname">
@@ -18,10 +17,9 @@
       <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
       <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
     </form>
-    <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
+    <a href="/pages/counter/main" class="counter">去往Vuex示例页面221</a>
   </div>
 </template>
-
 <script>
 import card from '@/components/card'
 
@@ -39,7 +37,7 @@ export default {
 
   methods: {
     bindViewTap () {
-      const url = '../logs/main'
+      const url = '../start/main'
       wx.navigateTo({ url })
     },
     getUserInfo () {
@@ -66,7 +64,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .userinfo {
   display: flex;
   flex-direction: column;

@@ -11,15 +11,17 @@ export default {
 }
 </script>
 
-<style>
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
+<style lang="scss">
+page{
+  height:100%;
+}
+.container{
+  background:url("https://static.eudic.net/web/yinyang/challenge_bg@2x.png") center center no-repeat;
+  background-size:100% 100% ;
+  height:100%;
+  padding-left:3.7%;
+  padding-right:3.7%;
+  overflow:hidden;
 }
 /* this rule will be remove */
 * {
@@ -27,5 +29,22 @@ export default {
   -moz-transition: width 2s;
   -webkit-transition: width 2s;
   -o-transition: width 2s;
+}
+.f_l{
+  float:left;
+}
+.f_r{
+  float:right;
+}
+.p_r{
+  position:relative;
+}
+.p_a{
+  position:absolute;
+}
+.clear:after{
+  display:table;
+  content:'';
+  clear:both;
 }
 </style>
