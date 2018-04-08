@@ -37,7 +37,7 @@
 	       	<div class="grayBj">
 	       			
 	       	</div>
-       		<div class="timeProgressActive" :class="[progressFlag&&(progressActive?'':'left100')]">
+       		<div class="timeProgressActive" :class="[progressFlag&&(progressActive?'progress0':'progress100')]">
        			
        		</div>
        </div>
@@ -191,9 +191,6 @@ export default {
 	.left0{
 		left:0%;
 	}
-	.left100{
-		left:-100%!important;
-	}
 	.selectCorrent{
 		background:#7DBE69!important;
 		color:#fff;
@@ -201,6 +198,15 @@ export default {
 	.selectWrong{
 		background:#EB5965!important;
 		color:#fff;
+	}
+
+	.progress100{
+		left；-100%!important；
+		transition:all 5s;
+	}
+	.progress0{
+		left；0%!important；
+		transition:all 1s;
 	}
 
 </style>
