@@ -16,7 +16,7 @@
         <div class="matchIngInfo">
               <section class="grayBj" :class="{grayActive:active.grayActive}"></section>
               <div class="matchUserInfo challengeInfo" :class="{infoActiveL:active.infoActive}">
-                  <img src="https://static.eudic.net/web/jingtingdang/bitmap_img2.png" alt="">
+                  <img class="imgBorder" src="https://static.eudic.net/web/jingtingdang/bitmap_img2.png" alt="">
                   <p class="infoName">
                       zhanghuanglong
                   </p>
@@ -25,7 +25,7 @@
                   </p>
               </div>
               <div class="matchOpponentInfo challengeInfo" :class="{infoActiveR:active.infoActive}">
-                   <img src="https://static.eudic.net/web/jingtingdang/bitmap_img2.png" alt="">
+                   <img class="imgBorder" src="https://static.eudic.net/web/jingtingdang/bitmap_img2.png" alt="">
                    <p class="infoName">
                       wujianglong
                    </p>
@@ -70,7 +70,6 @@ export default {
       },
       matchSpeedAfterAppear(){
         let n=Math.floor(Math.random()*this.random),i=0,interval=null;
-
         let format=(f)=>{
             let f1="00",f2="00",f3=f%60,f4=f/60;
             if(f4>1){
@@ -86,12 +85,18 @@ export default {
         interval=setInterval(()=>{
           if(i>n){
               clearInterval(interval)
-              this.matchIngAchieve=true
+              //灰色背景显示
               this.active.grayActive=true
+              //匹配对手信息显示
               setTimeout(()=>{
                   this.active.infoActive=true;
               },800)
+              //匹配成功显示
+              setTimeout(()=>{
+                  this.matchIngAchieve=true
+              },1200)
           }else{
+              //匹配时间显示
               i++;
               this.matchIng=format(i)
           } 
@@ -133,9 +138,9 @@ export default {
         position:relative;
         margin-top: 1.5rem;
         margin-bottom: 1rem;
-        
         >img{
-            width:100%;
+            width:500rpx;
+            height:500rpx;
             top:0;
         }
         .matchTime{
@@ -193,7 +198,6 @@ export default {
         img{
            width:100rpx;
            height:100rpx;
-           border:2px solid #fff;
            border-radius:1rem;
         }
       }
@@ -231,7 +235,7 @@ export default {
         left:100%;
       }
       to {
-        left:20%;
+        left:50%;
       }
   }   
 

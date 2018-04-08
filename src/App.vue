@@ -47,4 +47,18 @@ page{
   content:'';
   clear:both;
 }
+.t_a{
+  text-align:center;
+}
+.grayBj{
+  position:relative;
+  width:100%;
+  height:100%;
+  opacity: 0.3;
+  background: #000000;
+  z-index:8;
+}
+.imgBorder{
+  border:2px solid #fff;
+}
 </style>
