@@ -8,25 +8,27 @@
          	  <div class="resultListInfo">
          	  	    <div class="resultListInfoL t_l">
          	  	    	  <div class="">
-         	  	    	  	  <img src="https://static.eudic.net/web/jingtingdang/bitmap_img2.png" alt="">
+         	  	    	  	  <img class="imgBorder" src="https://static.eudic.net/web/jingtingdang/bitmap_img2.png" alt="">
          	  	    	  </div>
          	  	    	  <p class="score">100</p>
          	  	    	  <p class="name">wujainglong</p>
          	  	    </div>
          	  	    <div class="resultListInfoR t_r">
          	  	    	  <div class="">
-         	  	    	  	  <img src="https://static.eudic.net/web/jingtingdang/bitmap_img2.png" alt="">
+         	  	    	  	  <img class="imgBorder" src="https://static.eudic.net/web/jingtingdang/bitmap_img2.png" alt="">
          	  	    	  </div>
          	  	    	  <p class="score">10</p>
          	  	    	  <p class="name">zhanghuanglong</p>
          	  	    </div>
          	  </div>
          	  <div class="resultListLi">
-         	  	   <ul>
-         	  	   	   <li class="t_a" v-for="(item,index) in wordData">
-         	  	   	   	   {{item}}
-         	  	   	   </li>
-         	  	   </ul>
+         	  	   <scroll-view>
+   		         	  	   <ul>
+		         	  	   	   <li class="t_a" v-for="(item,index) in wordData">
+		         	  	   	   	   {{item}}
+		         	  	   	   </li>
+		         	  	   </ul>
+         	  	   </scroll-view>
          	  </div>
          	  <div class="resultListBtn">
          	  	   <button>继续挑战</button>
@@ -116,6 +118,8 @@ export default {
 		p{
 			color:#fff;
 			font-size:28rpx;
+			margin-top:10rpx;
+			margin-bottom:20rpx;
 		}
 	}
 
@@ -144,22 +148,24 @@ export default {
 			}
 			.resultListInfoL{
 				color:#E3495B;
-				li{
-					border: 1px solid #D8D8D8;
-				}
+				
 			}
 			
 		}
 		.resultListLi{
 			color:#444;
 			font-size:32rpx;
+			padding-top:200rpx;
+			height:600rpx;
+			li{
+				margin-left:40rpx;
+				margin-right:40rpx;
+				border-bottom: 1px solid #D8D8D8;
+				padding-top:20rpx;
+				padding-bottom:20rpx;
+			}
 		}
 	}
-
-	
-
-
-
 </style>
 
 
