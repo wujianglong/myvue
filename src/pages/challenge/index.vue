@@ -41,10 +41,10 @@
        			
        		</div>
        </div>
-       <div>
-       		<optionSelect :leftf="left0"></optionSelect>
+       <div class="optionSelect" :class="{left0:left0}">
+       		<optionSelect :classNames="optionFlag?'option1':'option2'"></optionSelect>
+       		<optionSelect :classNames="optionFlag?'option2':'option1'"></optionSelect>
        </div>
-	   
     </div>
 </template>
 
@@ -100,7 +100,8 @@ export default {
    	  	left0:false,
    	  	
    	  	progressFlag:false,
-   	  	progressActive:false
+   	  	progressActive:false,
+   	  	optionFlag:false
    	  }
    },
    methods : {
@@ -116,6 +117,20 @@ export default {
 		this.progressActive=true;
    	  },3000)
    	  
+   	  setInterval(()=>{
+		this.optionFlag=!this.optionFlag;
+   	  },5000)
+
+
+   	  
+	// wx.setNavigationBarColor({
+	//   frontColor: '#ffffff',
+	//   backgroundColor: '#ff0000',
+	//   animation: {
+	//     duration: 400,
+	//     timingFunc: 'easeIn'
+	//   }
+	// })
    }
 }
 </script>
@@ -184,8 +199,13 @@ export default {
 			height:100%;
 			width:100%;
 			border-radius:6rpx;
-			transition:all 5s;
 		}
+	}
+
+	.optionSelect{
+		position:relative;
+		left:110%;
+		transition:all .5s;
 	}
 
 	.left0{
@@ -201,11 +221,11 @@ export default {
 	}
 
 	.progress100{
-		left；-100%!important；
+		left:-100%!important;
 		transition:all 5s;
 	}
 	.progress0{
-		left；0%!important；
+		left:0%!important;
 		transition:all 1s;
 	}
 

@@ -1,5 +1,6 @@
 <template>
-       <div class="wordCard" :class="{left0:leftf}">
+     <div class="wordCard" :class="wordCardBindClass">
+          <div>
               <div class="word t_a">
                        bad
               </div>
@@ -8,26 +9,30 @@
               </div>
               <div class="questionProgress clear">
                      <span class="f_l">请选择该单词阴阳性</span>
+                     <span>{{msg}}</span>
                      <span class="f_r">4/10</span>
+
               </div>
               <div class="option t_a">
                      <ul>
                            <li v-for="(item,index) in data" :class="[index==select&&(index==correntSelect?'selectCorrent':'selectWrong')]" @click="selectFnc($event,index)">{{item}}</li>
                      </ul>
               </div>
-       </div>
+          </div>
+     </div>
 </template>
 
 <script>
 export default {
-  props: ['leftf'],
+  props: ['classNames'],
   data(){
        return {
               data:[
                  "n.m.","n.f.","n.m.","n.f."
               ],
               correntSelect:2,
-              select:-1
+              select:-1,
+              wordCardBindClass:this.classNames,
        }
   },
   methods:{
@@ -37,21 +42,31 @@ export default {
 
        },
 
+  },
+  watch:{
+      classNames(curVal,oldVal){
+        this.wordCardBindClass=oldVal;
+        console.log(curVal)
+
+        console.log(oldVal)
+     }
   }
 }
 </script>
 
 <style scoped lang="scss">
 .wordCard{
-       transition:all 0.5s;
-       left:110%;
        background: #FAFAFA;
        border-radius: 5px;
-       padding-left:40rpx;
-       padding-right:40rpx;
        margin-top:60rpx;
        padding-bottom:40rpx;
-       position:relative;
+       position:absolute;
+       top:0;
+       width:100%;
+       >div{
+           padding-left:40rpx;
+           padding-right:40rpx;
+       }
        .word{
               font-size: 60rpx;
               color: #2A1749;
@@ -97,5 +112,41 @@ export default {
 .selectWrong{
        background:#EB5965!important;
        color:#fff;
+}
+
+.option1{
+  animation:option1 2s 1;
+  animation-fill-mode: forwards;
+}
+
+.option2{
+  animation:option2 2s 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes option1{
+  0%{
+      left:0;
+      opacity:1;
+  }
+  60%{
+      opacity:1;
+  }
+  100%{
+      left:-110%;
+      opacity:0;
+  }
+}
+
+@keyframes option2{
+  0%{
+      opacity:0;
+  }
+  60%{
+      opacity:0;
+  }
+  100%{
+      opacity:1;
+  }
 }
 </style>

@@ -50,6 +50,12 @@ page{
 .t_a{
   text-align:center;
 }
+.t_l{
+  text-align:left;
+}
+.t_r{
+  text-align:right;
+}
 .grayBj{
   position:relative;
   width:100%;
