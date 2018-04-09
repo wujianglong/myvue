@@ -156,13 +156,18 @@ export default {
 			color:#444;
 			font-size:32rpx;
 			padding-top:200rpx;
-			height:600rpx;
+			ul{
+				height:100%;
+			}
 			li{
 				margin-left:40rpx;
 				margin-right:40rpx;
 				border-bottom: 1px solid #D8D8D8;
 				padding-top:20rpx;
 				padding-bottom:20rpx;
+			}
+			scroll-view{
+				height:600rpx;
 			}
 		}
 	}
