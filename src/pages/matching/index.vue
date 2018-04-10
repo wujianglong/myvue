@@ -95,6 +95,13 @@ export default {
               setTimeout(()=>{
                   this.matchIngAchieve=true
               },1200)
+
+              setTimeout(()=>{
+
+                  wx.redirectTo({
+                    url: '../challenge/main'
+                  })
+              },1400)
           }else{
               //匹配时间显示
               i++;
@@ -109,23 +116,27 @@ export default {
   onReady(){
       console.log("2")
   },
+  onShow(){
+    wx.hideTabBar()
+  },
   mounted(){
+      
       this.active.matchSpeedActive=true;
       this.matchSpeedAfterAppear()
-     
-      // setTimeout(()=>{
-      //     this.active.grayActive=true;
-      // },300)
-
-      // setTimeout(()=>{
-      //     this.active.infoActive=true;
-      // },1100)
+      
+  },
+  onHide(){
+      cosnole.log("隐藏了")
+      this.matchIngAchieve=false;
+      this.matchIng="00:00";
+      this.active={
+        matchSpeedActive:false,
+        grayActive:false,
+        infoActive:false
+      }
   }
 }
 
-/**
-* 此页面动效 通过动画animation过渡配合apper after-appear方法监听匹配成功动画完成 用添加class方法 下面对战的动画依次出来  
-*/
 </script>
 <style scoped lang="scss">
 

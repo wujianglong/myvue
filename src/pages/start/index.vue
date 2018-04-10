@@ -6,6 +6,9 @@
               开始测验
             </p>
         </div>
+        <div style="position:absolute;top:0">
+          111
+        </div>
     </div>
 </template>
 
@@ -21,6 +24,30 @@ export default {
       const url = '../catalog/main'
       wx.navigateTo({ url })
     }
+  },
+  onReady(){
+    wx.hideTabBar({
+
+        fail:function(){
+
+            setTimeout(function(){  // 做了个延时重试一次，作为保底。
+
+                wx.hideTabBar()
+
+            },500)       
+
+        }
+
+    })
+  },
+  onShow(){
+      wx.hideTabBar()
+
+
+      // wx.setNavigationBarTitle({
+      //   title: '当前页面'
+      // })
+
   }
 }
 </script>

@@ -31,7 +31,9 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 		//总场次
 		totalCount:"",
 		//胜率
-		WinPercentage:"",
+		winPercentage:"",
+		//连胜场次
+		straightWinCount:""
 		.....
 	},
 	enemyInfo:{
@@ -42,7 +44,9 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 		//总场次
 		totalCount:"",
 		//胜率
-		WinPercentage:"",
+		winPercentage:"",
+		//连胜场次
+		straightWinCount:""
 		.....
 	},
 	wordInfo:[
@@ -60,6 +64,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 			],
 			//单词词性
 			wordType:1,
+			corrent:true
 		},
 		{	
 			//单词
@@ -75,6 +80,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 			],
 			//单词词性
 			wordType:1,
+			corrent:false
 		},
 		{	
 			//单词
@@ -90,8 +96,43 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 			],
 			//单词词性
 			wordType:1,
+			corrent:true
 		},
 		...
 	],
+	//困难难度
 	degreeDifficulty:"0.5"
+}
+
+
+[
+	{
+		word:'',
+		success:false,
+
+	},
+	{
+		word:'',
+		success:true
+	},
+	.....
+]
+
+{
+	achieve:true,
+	challengeDetail:[
+		{
+			word:'',
+			corrent:false,
+			//答题时间
+			time:8
+		},
+		{
+			word:'',
+			corrent:true,
+			time:6
+
+		},
+		.....
+	]
 }

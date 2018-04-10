@@ -22,17 +22,23 @@
          	  	    </div>
          	  </div>
          	  <div class="resultListLi">
-         	  	   <scroll-view>
+         	  	   <scroll-view scroll-y>
    		         	  	   <ul>
 		         	  	   	   <li class="t_a" v-for="(item,index) in wordData">
+		         	  	   	   	   <span class="f_l">
+		         	  	   	   	   		<img src="https://static.eudic.net/web/yinyang/card_fail_icon@2x.png" alt="">
+		         	  	   	   	   </span>
 		         	  	   	   	   {{item}}
+		         	  	   	   	   <span class="f_r">
+		         	  	   	   	   		<img src="https://static.eudic.net/web/yinyang/card_right_icon@2x.png" alt="">
+		         	  	   	   	   </span>
 		         	  	   	   </li>
 		         	  	   </ul>
          	  	   </scroll-view>
          	  </div>
          	  <div class="resultListBtn">
-         	  	   <button>继续挑战</button>
-         	  	   <button>炫耀成绩</button>
+         	  	   <button class="resultListBtnL">继续挑战</button>
+         	  	   <button class="resultListBtnR">炫耀成绩</button>
          	  </div>
          </div>
     </div>
@@ -127,47 +133,83 @@ export default {
 		background:#fff;
 		border-radius: 5px;
 		position:relative;
+		padding-bottom:20rpx;
 		.resultListInfo{
 			display:flex;
 			justify-content:space-between;
 			position:absolute;
 			z-index:9999;
 			width:100%;	
-			top:-44rpx;
+			top:-41rpx;
 			img{
-				width:88rpx;
-				height:88rpx;
-				border-radius:88rpx;
+				width:82rpx;
+				height:82rpx;
+				border-radius:82rpx;
 			}
 			>div{
 				margin-left:40rpx;
 				margin-right:40rpx;
 				flex:1;
-				font-size:40rpx;
+				font-size:38rpx;
 
 			}
 			.resultListInfoL{
 				color:#E3495B;
-				
 			}
-			
 		}
 		.resultListLi{
 			color:#444;
 			font-size:32rpx;
-			padding-top:200rpx;
-			ul{
-				height:100%;
-			}
+			padding-top:180rpx;
+			
 			li{
 				margin-left:40rpx;
 				margin-right:40rpx;
-				border-bottom: 1px solid #D8D8D8;
-				padding-top:20rpx;
-				padding-bottom:20rpx;
+				border-bottom: 0.5px solid #D8D8D8;
+				padding-top:8rpx;
+				padding-bottom:8rpx;
+				display:flex;
+				justify-content:space-between;
+				align-items:center;
+				span{
+					font-size:46rpx;
+					display:inline-block;
+				}
+				span.f_l{
+					color:#7DBE69;
+				}
+				span.f_r{
+					color:#E3495B;
+				}
+				img{
+					width:32rpx;
+					height:32rpx;
+				}
+			}
+			li:last-child{
+				border-bottom: none;
 			}
 			scroll-view{
-				height:600rpx;
+				height:660rpx;
+			}
+		}
+		.resultListBtn{
+			display:flex;
+			margin-top:20rpx;
+			>button{
+				width:45%;
+				height:72rpx;
+				line-height:72rpx;
+				border:none;
+				color:#fff;
+			}
+			.resultListBtnL{
+				background-image: linear-gradient(-137deg, #6586DB 0%, #6D5BD9 100%);
+				border-radius: 100px;
+			}
+			.resultListBtnR{
+				background-image: linear-gradient(-90deg, #FBDA61 0%, #F76B1C 80%);
+				border-radius: 100px;
 			}
 		}
 	}

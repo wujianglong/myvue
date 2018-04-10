@@ -6,6 +6,6 @@ app.$mount()
 
 export default {
   config: {
-    navigationBarTitleText: '单词测验'
+    navigationBarTitleText: '单词测验22'
   }
 }
