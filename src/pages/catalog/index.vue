@@ -1,5 +1,6 @@
 <template>
     <div class="cataLog container">
+    	<return-btn></return-btn>
         <ul>
             <li v-for="(item, index) in cataData" :style="{background:item.bj}" @click="matchingLink">
             	<div class="userInfoLi" v-if="index==0">
@@ -35,10 +36,15 @@
 </template>
 
 <script>
+import returnBtn from '@/components/return'
+
 export default {
    name: 'CataLog',
    created:()=>{
 
+   },
+   components:{
+    returnBtn
    },
    data:()=>{
    	  return {

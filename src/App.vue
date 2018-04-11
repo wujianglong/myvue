@@ -13,7 +13,11 @@ export default {
 
 <style lang="scss">
 page{
-  height:100%;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0; 
 }
 .container{
   background:url("https://static.eudic.net/web/yinyang/challenge_bg@2x.png") center center no-repeat;

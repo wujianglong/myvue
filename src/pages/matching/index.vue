@@ -1,5 +1,6 @@
 <template>
     <div id="matching" class="container">
+        <return-btn></return-btn>
         <div class="matchSpeed" :class="{matchSpeedActive:active.matchSpeedActive}">
               <img src="https://static.frdic.com/web/yinyang/match_img@2x.png" alt="">
               <div class="matchTime">
@@ -37,6 +38,7 @@
     </div>
 </template>
 <script>
+import returnBtn from '@/components/return'
 export default {
   created:()=>{
 
@@ -53,6 +55,9 @@ export default {
       },
       animationDate:{}
     }
+  },
+  components:{
+    returnBtn
   },
   methods:{
       animationFnc(){

@@ -1,18 +1,18 @@
 <template>
     <div class="ChallengeStart container">
+        
         <img src="https://static.eudic.net/web/yinyang/challenge_logo@2x.png" alt="">
         <div>
             <p @click="cataLogLink">
               开始测验
             </p>
         </div>
-        <div style="position:absolute;top:0">
-          111
-        </div>
     </div>
 </template>
 
 <script>
+import returnBtn from '@/components/return'
+
 export default {
   data () {
     return {
@@ -24,6 +24,9 @@ export default {
       const url = '../catalog/main'
       wx.navigateTo({ url })
     }
+  },
+  components:{
+    returnBtn
   },
   onReady(){
     wx.hideTabBar({

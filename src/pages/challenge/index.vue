@@ -1,5 +1,6 @@
 <template>
     <div class="challenge container">
+       <return-btn></return-btn>
        <div class="matchingInfo p_r" :class="{left0:left0}">
        		<div class="grayBj">
        			
@@ -49,6 +50,7 @@
 </template>
 
 <script>
+import returnBtn from '@/components/return'
 import optionSelect from '@/components/option'
 export default {
    name: 'challenge',
@@ -56,7 +58,7 @@ export default {
    		
    },
    components: {
-    optionSelect
+    optionSelect,returnBtn
    },
    data:()=>{
    	  return {
