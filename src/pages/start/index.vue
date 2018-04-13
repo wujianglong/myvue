@@ -29,28 +29,19 @@ export default {
     returnBtn
   },
   onReady(){
-    wx.hideTabBar({
 
-        fail:function(){
-
-            setTimeout(function(){  // 做了个延时重试一次，作为保底。
-
-                wx.hideTabBar()
-
-            },500)       
-
-        }
-
-    })
   },
   onShow(){
       wx.hideTabBar()
 
-
+      console.log("1222")
       // wx.setNavigationBarTitle({
       //   title: '当前页面'
       // })
 
+  },
+  onHide(){
+    console.log("hide")
   }
 }
 </script>
@@ -58,7 +49,7 @@ export default {
     .ChallengeStart{
       overflow:hidden;
       img{
-        margin:220rpx auto 160rpx;
+        margin:300rpx auto 160rpx;
         display:block;
         width:430rpx;
         height:400rpx;

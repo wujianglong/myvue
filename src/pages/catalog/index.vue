@@ -85,17 +85,28 @@ export default {
   				link:"/matching"
   			},
    	  	],
+   	  	number:0
    	  }
    },
    methods : {
    	  matchingLink(){
-   	      const url="../matching/main";
+   	  	  let r=+new Date()
+   	      const url="../matching/main?"+r;
    	      wx.navigateTo({ url })
    	  }
-   }
+   },
+   onShow(){
+   	   	this.number=0;
+   	},
+   	onReady(){
+   		  // var i=this.number;
+	      // setInterval(function(){
+	      // 	i++;
+	      // 	console.log(i)
+	      // },1000)
+   	}
 }
 </script>
-
 <style scoped lang="scss">
 	$ft_1:0.239rem;
 	$ft_2:0.307rem;

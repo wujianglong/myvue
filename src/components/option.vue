@@ -1,5 +1,5 @@
 <template>
-     <div class="wordCard" :class="wordCardBindClass">
+     <div class="wordCard" :class="wordCardBindClass" v-show="show">
           <div>
               <div class="word t_a">
                        bad
@@ -33,6 +33,7 @@ export default {
               correntSelect:2,
               select:-1,
               wordCardBindClass:this.classNames,
+              show:true
        }
   },
   methods:{
