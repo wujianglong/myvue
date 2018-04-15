@@ -18,10 +18,13 @@ page{
   position: fixed;
   top: 0;
   bottom: 0; 
+   background:url("https://static.eudic.net/web/yinyang/challenge_bg@2x.png") center center no-repeat;
+    background-size:100% 100% ;
 }
 .container{
+ 
   background:url("https://static.eudic.net/web/yinyang/challenge_bg@2x.png") center center no-repeat;
-  background-size:100% 100% ;
+    background-size:100% 100% ;
   height:100%;
   padding-left:3.7%;
   padding-right:3.7%;

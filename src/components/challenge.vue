@@ -42,8 +42,8 @@
        		</div>
        </div>
        <div class="optionSelect" :class="{left0:left0}">
-       		<optionSelect :classNames="optionFlag?'option1':'option2'"></optionSelect>
-       		<optionSelect :classNames="optionFlag?'option2':'option1'"></optionSelect>
+       		<optionSelect :classNames="[progressFlag&&(optionFlag?'option1':'option2')]"></optionSelect>
+       		<optionSelect :classNames="[progressFlag&&(optionFlag?'option2':'option1')]"></optionSelect>
        </div>
     </div>
 </template>
@@ -98,7 +98,6 @@ export default {
   			},
    	  	],
    	  	left0:false,
-   	  	
    	  	progressFlag:false,
    	  	progressActive:false,
    	  	optionFlag:false
@@ -108,18 +107,25 @@ export default {
    	  
    },
    mounted(){
-   	  this.left0=true;
+   	  setTimeout(()=>{
+   	  		this.left0=true;
+   	  },100)
+
+   	  //是否开始倒计时
    	  setTimeout(()=>{
    	  	this.progressFlag=true;
-   	  },500)
+   	  },1000)
 
+   	  //倒计时正反方向()
    	  setTimeout(()=>{
 		this.progressActive=true;
-   	  },3000)
+   	  },3500)
    	  
+
+   	  //多少秒之后卡片切换(换成用户点击或时间已过 卡片开始切换)
    	  setInterval(()=>{
 		this.optionFlag=!this.optionFlag;
-   	  },5000)
+   	  },5500)
 
 
    	  
@@ -141,7 +147,7 @@ export default {
 	.matchingInfo{
 		color:#fff;
 		left:110%;
-		transition:all 0.5s;
+		transition:all 0.8s;
 		.grayBj{
 			height:136rpx;
 			border-radius: 5px;
@@ -188,7 +194,7 @@ export default {
 		position:relative;
 		border-radius:6rpx;
 		overflow:hidden;
-		transition:all 0.5s;
+		transition:all 0.8s;
 		left:-110%;
 		.timeProgressActive{
 			position: absolute;
@@ -205,7 +211,7 @@ export default {
 	.optionSelect{
 		position:relative;
 		left:110%;
-		transition:all .5s;
+		transition:all 0.8s;
 	}
 
 	.left0{
@@ -226,7 +232,7 @@ export default {
 	}
 	.progress0{
 		left:0%!important;
-		transition:all 1s;
+		transition:all 0.8s;
 	}
 
 </style>

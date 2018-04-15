@@ -3,7 +3,7 @@
         
         <img src="https://static.eudic.net/web/yinyang/challenge_logo@2x.png" alt="">
         <div>
-            <p @click="cataLogLink">
+            <p @click="cataLogLink" :class="{scaleAnimation:smallFlag}" @touchstart="touchFnc">
               开始测验
             </p>
         </div>
@@ -16,13 +16,21 @@ import returnBtn from '@/components/return'
 export default {
   data () {
     return {
-      msg: 'Welcome1 to Your Vue.js App'
+      msg: 'Welcome1 to Your Vue.js App',
+      smallFlag:false
     }
   },
   methods: {
     cataLogLink () {
+      
+      
       const url = '../catalog/main'
       wx.navigateTo({ url })
+    },
+    touchFnc(){
+      this.smallFlag=true;
+
+      setTimeout(()=>{this.smallFlag=false;},100)
     }
   },
   components:{
@@ -65,8 +73,25 @@ export default {
           border-radius: 100rpx;
           text-align:center;
           color:#fff;
-       
+
+
         }
+      }
+    }
+
+    .scaleAnimation{
+        animation:scale 0.8s;
+    }
+
+    @keyframes scale{
+      0%{
+        transform:scale(1)
+      }
+      50%{
+        transform:scale(0.8)
+      }
+      100%{
+        transform:scale(1)
       }
     }
 </style>

@@ -42,7 +42,6 @@ export default {
               console.log(e.currentTarget.dataset.eventid)
 
        },
-
   },
   watch:{
       classNames(curVal,oldVal){
@@ -54,7 +53,6 @@ export default {
   }
 }
 </script>
-
 <style scoped lang="scss">
 .wordCard{
        background: #FAFAFA;

@@ -50,7 +50,6 @@
 </template>
 
 <script>
-import returnBtn from '@/components/return'
 import optionSelect from '@/components/option'
 export default {
    name: 'challenge',
@@ -58,7 +57,7 @@ export default {
    		
    },
    components: {
-    optionSelect,returnBtn
+    optionSelect
    },
    data:()=>{
    	  return {
@@ -110,7 +109,7 @@ export default {
    	  
    },
    mounted(){
-   	  this.left0=true;
+   	  this.left0=false;
    	  setTimeout(()=>{
    	  	this.progressFlag=true;
    	  },500)
