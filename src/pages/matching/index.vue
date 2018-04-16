@@ -121,15 +121,16 @@ export default {
         setTimeout(()=>{
            this.challengeShow=true;
         },500)
-      },
-      emit(){
-        console.log("emit")
       }
+      
   },
   mounted(){
+
   },
   onShow(){
      this.matchSpeedAfterAppear()
+
+
   },
   onUnload(){
      this.clearDefault()

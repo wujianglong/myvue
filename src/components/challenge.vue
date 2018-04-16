@@ -52,201 +52,37 @@ import optionSelect from '@/components/option'
 export default {
    name: 'challenge',
    created(){
-   		
+   		 this.data[0]=this.$root.$mp.appOptions.globalData.word_info[0]
+   	  	 this.data[1]=this.$root.$mp.appOptions.globalData.word_info[1]
    },
    components: {
     optionSelect
    },
    data:()=>{
    	  return {
-   	  	cataData:[
-   	  		{	
-   	  			userAvatar:"https://static.eudic.net/web/jingtingdang/bitmap_img2.png",
-				//用户名
-				userName:"伍江龙",
-				//总场次
-				totalCount:"2000",
-				//胜率
-				WinPercentage:"81%",
-				//背景色
-				bj:"#4898D6"
-   	  		},
-   	  		{
-				title:"选择课本",
-				des:"选择一本喜欢的课本，开始你的阅读之旅～",
-				link:"",
-				bj:"#8C62DA",
-				url:"https://static.eudic.net/web/yinyang/select_book_bg@2x.png",
-				link:"/matching"
-  			},
-  			{
-  				title:"开始PK",
-  				des:"斗智斗勇，和你的对手展开一场智力比拼吧",
-  				linl:"",
-  				bj:"#A763CA",
-  				url:"https://static.eudic.net/web/yinyang/pk_bg@2x.png",
-  				link:"/matching"
-  			},
-  			{
-  				title:"排名榜",
-  				des:"斗智斗勇，和你的对手展开一场智力比拼吧",
-  				link:"",
-  				bj:"#7DBE69",
-  				url:"https://static.eudic.net/web/yinyang/ranking_bg@2x.png",
-  				link:"/matching"
-  			},
-   	  	],
-   	  	data:["wjl","wjl1"],
    	  	left0:false,
    	  	progressFlag:false,
    	  	progressActive:false,
    	  	optionFlag:false,
-   	  	word_info:[
-   	  		{    
-	            //单词
-	            word:"world",
-	            //单词解释
-	            word_explain:"世界",
-	            //单词题目列表
-	            //服务器用AnswerContent 和 AnswerType对象
-	            answers: [
-		            {
-		                title: 'n.m',
-		                type: 1 //correct
-		            },
-		            {
-		                title: 'n.f',
-		                type: -1 //incorrect
-		            },
-		            {
-		                title: 'n',
-		                type: -1 //incorrect
-		            },
-		            {
-		                title: '不知道',
-		                type: 0 //unknwon
-		            }
-	            ], 
-	            enemy_selection:1
-	        },
-	        {    
-	            //单词
-	            word:"other",
-	            //单词解释
-	            word_explain:"其他的",
-	            //单词题目列表
-	            //服务器用AnswerContent 和 AnswerType对象
-	            answers: [
-		            {
-		                title: 'n.m',
-		                type: 1 //correct
-		            },
-		            {
-		                title: 'n.f',
-		                type: -1 //incorrect
-		            },
-		            {
-		                title: 'n',
-		                type: -1 //incorrect
-		            },
-		            {
-		                title: '不知道',
-		                type: 0 //unknwon
-		            }
-	            ], 
-	            enemy_selection:1
-	        },
-	        {    
-	            //单词
-	            word:"school",
-	            //单词解释
-	            word_explain:"学校",
-	            //单词题目列表
-	            //服务器用AnswerContent 和 AnswerType对象
-	            answers: [
-		            {
-		                title: 'n.m',
-		                type: 1 //correct
-		            },
-		            {
-		                title: 'n.f',
-		                type: -1 //incorrect
-		            },
-		            {
-		                title: 'n',
-		                type: -1 //incorrect
-		            },
-		            {
-		                title: '不知道',
-		                type: 0 //unknwon
-		            }
-	            ], 
-	            enemy_selection:1
-	        },
-	        {    
-	            //单词
-	            word:"sister",
-	            //单词解释
-	            word_explain:"姐妹",
-	            //单词题目列表
-	            //服务器用AnswerContent 和 AnswerType对象
-	            answers: [
-		            {
-		                title: 'n.m',
-		                type: 1 //correct
-		            },
-		            {
-		                title: 'n.f',
-		                type: -1 //incorrect
-		            },
-		            {
-		                title: 'n',
-		                type: -1 //incorrect
-		            },
-		            {
-		                title: '不知道',
-		                type: 0 //unknwon
-		            }
-	            ], 
-	            enemy_selection:1
-	        },
-	        {    
-	            //单词
-	            word:"swiming",
-	            //单词解释
-	            word_explain:"有用",
-	            //单词题目列表
-	            //服务器用AnswerContent 和 AnswerType对象
-	            answers: [
-		            {
-		                title: 'n.m',
-		                type: 1 //correct
-		            },
-		            {
-		                title: 'n.f',
-		                type: -1 //incorrect
-		            },
-		            {
-		                title: 'n',
-		                type: -1 //incorrect
-		            },
-		            {
-		                title: '不知道',
-		                type: 0 //unknwon
-		            }
-	            ], 
-	            enemy_selection:1
-	        }
-   	  	]
+   	  	data:['1','2']
    	  }
    },
    methods : {
    	  timeProgressEnd(){
    	  	this.progressActive=!this.progressActive;
    	  	console.log("rrrrr")
-   	  }
+   	  },
+   	  emit11(){
+        
+      }
    },
    mounted(){
+      console.log(this.$root.$mp.appOptions.globalData.degree_difficulty)
+   	 
+
+
+
+
    	  //兼容 延迟才有动画
    	  setTimeout(()=>{
    	  		this.left0=true;

@@ -18,5 +18,9 @@ export default {
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: '#fff'
     }
+  },
+  globalData:{
+    name:"wjl"
   }
+
 }

@@ -18,7 +18,9 @@
               <div class="option t_a">
                      <ul>
                           <!-- 不包括当前点击的对象 -->
-                          <li v-for="(item,index) in data" :class="[index==select&&classComputed,((index!=select)&&clickFlag)&&(correntSelect==index?'selectCorrent showLi1':'hideLi')]" @click="selectFnc($event,index)">{{item}}</li>
+                          <li v-for="(item,index) in data" :class="[(clickFlag&&index==select)&&(item.type==1?'selectCorrent showLi':'selectWrong showLi'),((index!=select)&&clickFlag)&&(item.type==1?'selectCorrent showLi1':'hideLi')]" @click="selectFnc($event,index)">
+                              {{item.title}}
+                          </li>
                      </ul>
               </div>
           </div>
@@ -27,26 +29,19 @@
 
 <script>
 export default {
-  props: ['classNames'],
+  props: ['classNames','optionData'],
   data(){
        return {
-              data:[
-                 "n.m.","n.f.","n.m.","n.f."
-              ],
+              data:this.optionData.answers,
               correntSelect:2,
               select:-1,
               wordCardBindClass:this.classNames,
-              clickFlag:false
+              clickFlag:false,
+              clickCount:0
        }
   },
   computed:{
-      classComputed(){
-        var str= this.select==this.correntSelect?'selectCorrent showLi':'selectWrong showLi';
-        return str;
-      },
-      count(){
-          
-      }
+    
   },
   methods:{
        classFnc(item,index){
@@ -57,12 +52,13 @@ export default {
         this.clickFlag=true;
         this.select=i;
         console.log(e.currentTarget.dataset.eventid)
-        
-        console.log(this.$root)
-        
 
-        this.$root.$data.matchIng="11"
-        console.log(this.$root.$data.matchIng)
+        this.$parent.emit11()
+
+        setTimeout(()=>{
+          this.clickFlag=false;
+        },1000)
+
        }
   },
   watch:{
