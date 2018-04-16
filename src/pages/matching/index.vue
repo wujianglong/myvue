@@ -1,6 +1,5 @@
 <template>
     <div id="matching" class="container">
-        <return-btn></return-btn>
         <challenge v-if="challengeShow"></challenge>
         <div id="matching" v-else>
             <div>
@@ -18,8 +17,8 @@
                       </div>
                 </div>
                 <div class="matchIngInfo">
-                      <section class="grayBj" :class="{grayActive:active.grayActive}"></section>
-                      <div class="matchUserInfo challengeInfo" :class="{infoActiveL:active.infoActive}">
+                      <section class="grayBj" :class="{grayActive:active.grayActive}" @animationend="grayEnd"></section>
+                      <div class="matchUserInfo challengeInfo" :class="{infoActiveL:active.infoActive}" @animationend="challengeInfoEnd">
                           <img class="imgBorder" src="https://static.eudic.net/web/jingtingdang/bitmap_img2.png" alt="">
                           <p class="infoName">
                               zhanghuanglong
@@ -40,7 +39,7 @@
                 </div>
             </div>
         </div>
-        
+        <div>{{count}}</div>
     </div>
 </template>
 <script>
@@ -48,7 +47,6 @@ import returnBtn from '@/components/return'
 import challenge from '@/components/challenge'
 
 export default {
-  
   data(){
     return {
       random:8,
@@ -65,6 +63,9 @@ export default {
   },
   components:{
       returnBtn,challenge
+  },
+  computed: {
+ 
   },
   methods:{
       matchSpeedAfterAppear(){
@@ -88,17 +89,10 @@ export default {
               clearInterval(this.interval)
               //灰色背景显示
               this.active.grayActive=true
-              //匹配对手信息显示
-              setTimeout(()=>{
-                  this.active.infoActive=true;
-              },800)
               //匹配成功显示
-              setTimeout(()=>{
-                  this.matchIngAchieve=true
-              },1200)
-              setTimeout(()=>{
-                 _self.challengeShow=true;
-              },1400)
+              // setTimeout(()=>{
+              //    _self.challengeShow=true;
+              // },1400)
           }else{
               //匹配时间显示
               i++;
@@ -107,7 +101,7 @@ export default {
         },1000)
       },
       clearDefault(){
-          this.matchIngAchieve=false;
+          this.matchIngAchieve=false; 
           this.challengeShow=false;
           this.matchIng="00:00";
           clearInterval(this.interval)
@@ -116,34 +110,21 @@ export default {
             grayActive:false,
             infoActive:false
           }
+      },
+      //灰色背景出来之后用户信息出来动画
+      grayEnd(){
+        this.active.infoActive=true;
+      },
+      //用户信息出来动画跳转
+      challengeInfoEnd(){
+        this.matchIngAchieve=true
+        setTimeout(()=>{
+           this.challengeShow=true;
+        },500)
+      },
+      emit(){
+        console.log("emit")
       }
-  },
-  beforeCreate(){
-    console.log("beforeCreate")
-  },
-  created(){
-    console.log("create")
-  },
-  beforeMount(){
-    console.log('beforeMount')
-  },
-  beforeUpdate(){
-    console.log('beforeUpdate')
-  },
-  updated(){
-    console.log('updated')
-  },
-  activated(){
-    console.log('activated')
-  },
-  deactivated(){
-    console.log('deactivated')
-  },
-  beforeDestroy(){
-    console.log('beforeDestroy')
-  },
-  destroyed(){
-    console.log('destroyed')
   },
   mounted(){
   },
@@ -153,7 +134,6 @@ export default {
   onUnload(){
      this.clearDefault()
   }
-
 }
 
 </script>

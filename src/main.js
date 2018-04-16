@@ -16,8 +16,7 @@ export default {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#3B337C',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: '#fff',
-      navigationStyle: 'custom'
+      navigationBarTextStyle: '#fff'
     }
   }
 }

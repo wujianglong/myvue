@@ -37,17 +37,16 @@
 	       	<div class="grayBj">
 	       			
 	       	</div>
-       		<div class="timeProgressActive" :class="[progressFlag&&(progressActive?'progress0':'progress100')]">
+       		<div class="timeProgressActive" :class="[progressFlag&&(progressActive?'progress0':'progress100')]" @animationend="timeProgressEnd">
        			
        		</div>
        </div>
        <div class="optionSelect" :class="{left0:left0}">
-       		<optionSelect :classNames="[progressFlag&&(optionFlag?'option1':'option2')]"></optionSelect>
-       		<optionSelect :classNames="[progressFlag&&(optionFlag?'option2':'option1')]"></optionSelect>
+       		<optionSelect :classNames="[progressFlag&&(optionFlag?'option1':'option2')]" :optionData="data[0]"></optionSelect>
+       		<optionSelect :classNames="[progressFlag&&(optionFlag?'option2':'option1')]" :optionData="data[1]"></optionSelect>
        </div>
     </div>
 </template>
-
 <script>
 import optionSelect from '@/components/option'
 export default {
@@ -97,37 +96,177 @@ export default {
   				link:"/matching"
   			},
    	  	],
+   	  	data:["wjl","wjl1"],
    	  	left0:false,
    	  	progressFlag:false,
    	  	progressActive:false,
-   	  	optionFlag:false
+   	  	optionFlag:false,
+   	  	word_info:[
+   	  		{    
+	            //单词
+	            word:"world",
+	            //单词解释
+	            word_explain:"世界",
+	            //单词题目列表
+	            //服务器用AnswerContent 和 AnswerType对象
+	            answers: [
+		            {
+		                title: 'n.m',
+		                type: 1 //correct
+		            },
+		            {
+		                title: 'n.f',
+		                type: -1 //incorrect
+		            },
+		            {
+		                title: 'n',
+		                type: -1 //incorrect
+		            },
+		            {
+		                title: '不知道',
+		                type: 0 //unknwon
+		            }
+	            ], 
+	            enemy_selection:1
+	        },
+	        {    
+	            //单词
+	            word:"other",
+	            //单词解释
+	            word_explain:"其他的",
+	            //单词题目列表
+	            //服务器用AnswerContent 和 AnswerType对象
+	            answers: [
+		            {
+		                title: 'n.m',
+		                type: 1 //correct
+		            },
+		            {
+		                title: 'n.f',
+		                type: -1 //incorrect
+		            },
+		            {
+		                title: 'n',
+		                type: -1 //incorrect
+		            },
+		            {
+		                title: '不知道',
+		                type: 0 //unknwon
+		            }
+	            ], 
+	            enemy_selection:1
+	        },
+	        {    
+	            //单词
+	            word:"school",
+	            //单词解释
+	            word_explain:"学校",
+	            //单词题目列表
+	            //服务器用AnswerContent 和 AnswerType对象
+	            answers: [
+		            {
+		                title: 'n.m',
+		                type: 1 //correct
+		            },
+		            {
+		                title: 'n.f',
+		                type: -1 //incorrect
+		            },
+		            {
+		                title: 'n',
+		                type: -1 //incorrect
+		            },
+		            {
+		                title: '不知道',
+		                type: 0 //unknwon
+		            }
+	            ], 
+	            enemy_selection:1
+	        },
+	        {    
+	            //单词
+	            word:"sister",
+	            //单词解释
+	            word_explain:"姐妹",
+	            //单词题目列表
+	            //服务器用AnswerContent 和 AnswerType对象
+	            answers: [
+		            {
+		                title: 'n.m',
+		                type: 1 //correct
+		            },
+		            {
+		                title: 'n.f',
+		                type: -1 //incorrect
+		            },
+		            {
+		                title: 'n',
+		                type: -1 //incorrect
+		            },
+		            {
+		                title: '不知道',
+		                type: 0 //unknwon
+		            }
+	            ], 
+	            enemy_selection:1
+	        },
+	        {    
+	            //单词
+	            word:"swiming",
+	            //单词解释
+	            word_explain:"有用",
+	            //单词题目列表
+	            //服务器用AnswerContent 和 AnswerType对象
+	            answers: [
+		            {
+		                title: 'n.m',
+		                type: 1 //correct
+		            },
+		            {
+		                title: 'n.f',
+		                type: -1 //incorrect
+		            },
+		            {
+		                title: 'n',
+		                type: -1 //incorrect
+		            },
+		            {
+		                title: '不知道',
+		                type: 0 //unknwon
+		            }
+	            ], 
+	            enemy_selection:1
+	        }
+   	  	]
    	  }
    },
    methods : {
-   	  
+   	  timeProgressEnd(){
+   	  	this.progressActive=!this.progressActive;
+   	  	console.log("rrrrr")
+   	  }
    },
    mounted(){
+   	  //兼容 延迟才有动画
    	  setTimeout(()=>{
    	  		this.left0=true;
    	  },100)
 
-   	  //是否开始倒计时
+   	  //有开始提示后 开始倒计时条
    	  setTimeout(()=>{
    	  	this.progressFlag=true;
-   	  },1000)
+   	  },1800)
+
 
    	  //倒计时正反方向()
-   	  setTimeout(()=>{
-		this.progressActive=true;
-   	  },3500)
-   	  
+  //  	  setTimeout(()=>{
+		// this.progressActive=true;
+  //  	  },3500)
 
    	  //多少秒之后卡片切换(换成用户点击或时间已过 卡片开始切换)
-   	  setInterval(()=>{
-		this.optionFlag=!this.optionFlag;
-   	  },5500)
-
-
+  //  	  setInterval(()=>{
+		// this.optionFlag=!this.optionFlag;
+  //  	  },5500)
    	  
 	// wx.setNavigationBarColor({
 	//   frontColor: '#ffffff',
@@ -214,8 +353,9 @@ export default {
 		transition:all 0.8s;
 	}
 
-	.left0{
-		left:0%;
+	.left0{	
+		animation:framesleft0 0.8s;
+		animation-fill-mode: forwards;
 	}
 	.selectCorrent{
 		background:#7DBE69!important;
@@ -228,13 +368,18 @@ export default {
 
 	.progress100{
 		left:-100%!important;
-		transition:all 5s;
+		transition:all 55s;
 	}
 	.progress0{
 		left:0%!important;
 		transition:all 0.8s;
 	}
-
+	
+	@keyframes framesleft0{
+		100%{
+			left:0;
+		}
+	}
 </style>
 
 

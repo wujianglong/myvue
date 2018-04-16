@@ -1,5 +1,8 @@
 <template>
-     <div class="wordCard" :class="wordCardBindClass" v-show="show">
+     <div class="wordCard" :class="wordCardBindClass">
+          <div>
+            {{count}}
+          </div>
           <div>
               <div class="word t_a">
                        bad
@@ -11,11 +14,11 @@
                      <span class="f_l">请选择该单词阴阳性</span>
                      <span>{{msg}}</span>
                      <span class="f_r">4/10</span>
-
               </div>
               <div class="option t_a">
                      <ul>
-                           <li v-for="(item,index) in data" :class="[index==select&&(index==correntSelect?'selectCorrent':'selectWrong')]" @click="selectFnc($event,index)">{{item}}</li>
+                          <!-- 不包括当前点击的对象 -->
+                          <li v-for="(item,index) in data" :class="[index==select&&classComputed,((index!=select)&&clickFlag)&&(correntSelect==index?'selectCorrent showLi1':'hideLi')]" @click="selectFnc($event,index)">{{item}}</li>
                      </ul>
               </div>
           </div>
@@ -33,18 +36,38 @@ export default {
               correntSelect:2,
               select:-1,
               wordCardBindClass:this.classNames,
-              show:true
+              clickFlag:false
        }
   },
+  computed:{
+      classComputed(){
+        var str= this.select==this.correntSelect?'selectCorrent showLi':'selectWrong showLi';
+        return str;
+      },
+      count(){
+          
+      }
+  },
   methods:{
-       selectFnc(e,i){
-              this.select=i;
-              console.log(e.currentTarget.dataset.eventid)
+       classFnc(item,index){
 
        },
+       selectFnc(e,i){
+        if(this.clickFlag) return false;
+        this.clickFlag=true;
+        this.select=i;
+        console.log(e.currentTarget.dataset.eventid)
+        
+        console.log(this.$root)
+        
+
+        this.$root.$data.matchIng="11"
+        console.log(this.$root.$data.matchIng)
+       }
   },
   watch:{
       classNames(curVal,oldVal){
+
         this.wordCardBindClass=oldVal;
         console.log(curVal)
 
@@ -148,4 +171,41 @@ export default {
       opacity:1;
   }
 }
+
+.showLi{
+  animation:optionShow 0.5s;
+  animation-fill-mode: forwards;
+}
+.showLi1{
+  animation:optionShow1 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.hideLi{
+  animation:optionHide 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes optionShow{
+  100%{
+    opacity:1;
+  }
+}
+@keyframes optionShow1{
+  80%{
+    
+    transform:scale(1.05)
+  }
+  100%{
+    opacity:1;
+    transform:scale(1)
+  }
+}
+
+@keyframes optionHide{
+  100%{
+    opacity:0;
+  }
+}
+
 </style>

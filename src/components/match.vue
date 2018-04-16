@@ -87,14 +87,6 @@ export default {
               setTimeout(()=>{
                   this.matchIngAchieve=true
               },1200)
-              setTimeout(()=>{
-                  if(_self.unload){return false;}
-                  wx.redirectTo({
-                    url: '../challenge/main'
-                  })
-                  // $.emit()
-                  this.$emit('end')
-              },1400)
           }else{
               //匹配时间显示
               i++;

@@ -1,6 +1,5 @@
 <template>
     <div class="result container">
-    	 <return-btn></return-btn>
          <div class="headerImg t_a">
          	  <img src="https://static.eudic.net/web/yinyang/test_success_bg@2x.png" alt="">
          	  <p>挑战成功 5连胜</p>

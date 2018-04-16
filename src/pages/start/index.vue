@@ -1,6 +1,5 @@
 <template>
     <div class="ChallengeStart container">
-        
         <img src="https://static.eudic.net/web/yinyang/challenge_logo@2x.png" alt="">
         <div>
             <p @click="cataLogLink" :class="{scaleAnimation:smallFlag}" @touchstart="touchFnc">
