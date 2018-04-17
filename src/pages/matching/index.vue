@@ -44,7 +44,7 @@
 </template>
 <script>
 import returnBtn from '@/components/return'
-import challenge from '@/components/challenge'
+import challenge from '@/components/challenge1'
 
 export default {
   data(){
@@ -133,6 +133,7 @@ export default {
      // this.matchSpeedAfterAppear()
      this.challengeShow=true;
 
+     
 
      
   },

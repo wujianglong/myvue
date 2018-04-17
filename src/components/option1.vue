@@ -1,7 +1,7 @@
 <template>
      <div class="wordCard" :class="wordCardBindClass"  @animationend="wordEndChange" @animationstart="wordStartChange">
           <div class="canvasCircle">
-              <div>4</div>
+              <div>{{second}}</div>
               <canvas style="width: 140rpx; height: 140rpx;" canvas-id="firstCanvas"></canvas>
           </div>
           <div>
@@ -41,7 +41,8 @@ export default {
         clickCount:0,
         timeOut:null,
         interval:null,
-        countDownFlag:false
+        countDownFlag:false,
+        second:5
      }
   },
   computed:{
@@ -52,11 +53,9 @@ export default {
   },
   mounted(){
       var _self=this;
-      this.countDown()
-
-      setTimeout(()=>{_self.countDownFlag=true;},2000)
-
-
+      setTimeout(()=>{
+          _self.countDown()
+      },1000)
   },
   methods:{
        classFnc(item,index){
@@ -64,44 +63,42 @@ export default {
        },
        selectFnc(e,i){
        //清除canvas  进度
-      
+        let _self=this;
         clearInterval(this.interval)
-
         if(this.clickFlag) return false;
         this.clickFlag=true;
-        setTimeout(()=>{
-            this.clickFlag=false;
-        },3000)
-
 
         //点击选中高亮
         this.select=i;
 
         //更新数据  切换动画
-        this.$parent.dataUpdate()
-
-        
-
-       },
-       wordEndChange(){
-        this.countDownFlag=true;
-       },
-       wordStartChange(){
-          this.countDown()
+        setTimeout(()=>{
+            _self.countDown()
+            this.$parent.dataUpdate()
+            this.clickFlag=false;
+            this.clickCount++
+        },2000)
        },
        countDown(){
           let _self=this;
-               clearInterval(_self.interval)
-               _self.countDownFlag=false;
+              _self.countDownFlag=false;
               var context = wx.createCanvasContext('firstCanvas')
               render(context, 100, 4, 100);
-
+              setTimeout(()=>{
+                  _self.countDownFlag=true;
+              },1000)
+              
               var i = 0;
               _self.interval = setInterval(function() {
                   if(!_self.countDownFlag){return false;}
                   i++;
                   if (i >= 100) {
+                      //i=200;
+                      _self.second=0;
                       clearInterval(_self.interval)
+                      _self.selectFnc()
+                  }else{
+                      _self.second=5-Math.floor(i/20)
                   }
                   render(context, 100, 4, i);
               }, 50)
@@ -116,8 +113,6 @@ export default {
                   context.closePath();
                   context.draw()
               }
-
-
        },
        canvasShow(){
           let _self=this;
