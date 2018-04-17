@@ -33,17 +33,17 @@
        			</div>
        		</div>
        </div>
-       <div class="timeProgress" :class="{left0:left0}">
+       <!-- <div class="timeProgress" :class="{left0:left0}">
 	       	<div class="grayBj">
 	       			
 	       	</div>
        		<div class="timeProgressActive" :class="[progressFlag&&(progressActive?'progress0':'progress100')]" @animationend="timeProgressEnd">
        			
        		</div>
-       </div>
+       </div> -->
        <div class="optionSelect" :class="{left0:left0}">
-       		<optionSelect :classNames="[progressFlag&&(optionFlag?'option1':'option2')]" :optionData="data[0]"></optionSelect>
-       		<optionSelect :classNames="[progressFlag&&(optionFlag?'option2':'option1')]" :optionData="data[1]"></optionSelect>
+       		<optionSelect :classNames="[progressFlag&&(optionFlag?'option1':'option2')]" :optionData="data[1]"></optionSelect>
+       		<optionSelect :classNames="[progressFlag&&(optionFlag?'option2':'option1')]" :optionData="data[0]"></optionSelect>
        </div>
     </div>
 </template>
@@ -54,9 +54,11 @@ export default {
    created(){
    		 this.data[0]=this.$root.$mp.appOptions.globalData.word_info[0]
    	  	 this.data[1]=this.$root.$mp.appOptions.globalData.word_info[1]
+
+
    },
    components: {
-    optionSelect
+    	optionSelect
    },
    data:()=>{
    	  return {
@@ -64,7 +66,9 @@ export default {
    	  	progressFlag:false,
    	  	progressActive:false,
    	  	optionFlag:false,
-   	  	data:['1','2']
+   	  	data:['1','2'],
+   	  	clickCount:0,
+   	  	setTimeout:null
    	  }
    },
    methods : {
@@ -72,8 +76,34 @@ export default {
    	  	this.progressActive=!this.progressActive;
    	  	console.log("rrrrr")
    	  },
-   	  emit11(){
-        
+   	  dataUpdate(){
+   	  	this.clickCount++;
+   	  	// if(this.clickCount%2==0){
+   	  	// }else{
+   	  	// 	this.data[0]=this.$root.$mp.appOptions.globalData.word_info[0]
+   	  	// }
+   	  	
+   	  	if(this.clickCount>1){
+   	  		if(this.clickCount%2==0){
+   	  			this.data[0]=this.$root.$mp.appOptions.globalData.word_info[this.clickCount]
+   	  		}else{
+   	  			this.data[1]=this.$root.$mp.appOptions.globalData.word_info[this.clickCount]
+   	  		}
+
+   	  		setTimeout(()=>{
+				this.optionFlag=!this.optionFlag;
+		   	},1500)
+   	  	}else{
+   	  		setTimeout(()=>{
+				this.progressFlag=true;
+		   	},1500)
+   	  		
+   	  	}
+
+        console.log("dataUpdate")
+        console.log(this.clickCount)
+
+	   	
       }
    },
    mounted(){
@@ -89,9 +119,7 @@ export default {
    	  },100)
 
    	  //有开始提示后 开始倒计时条
-   	  setTimeout(()=>{
-   	  	this.progressFlag=true;
-   	  },1800)
+   	  
 
 
    	  //倒计时正反方向()
@@ -100,9 +128,7 @@ export default {
   //  	  },3500)
 
    	  //多少秒之后卡片切换(换成用户点击或时间已过 卡片开始切换)
-  //  	  setInterval(()=>{
-		// this.optionFlag=!this.optionFlag;
-  //  	  },5500)
+   	
    	  
 	// wx.setNavigationBarColor({
 	//   frontColor: '#ffffff',
@@ -185,6 +211,7 @@ export default {
 
 	.optionSelect{
 		position:relative;
+		top:30rpx;
 		left:110%;
 		transition:all 0.8s;
 	}

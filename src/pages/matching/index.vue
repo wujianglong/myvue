@@ -70,6 +70,8 @@ export default {
   methods:{
       matchSpeedAfterAppear(){
         let n=Math.floor(Math.random()*this.random),i=0;
+
+        // let n=0,i=0;
         this.active.matchSpeedActive=true;
         this.unload=false;
         let format=(f)=>{
@@ -128,12 +130,20 @@ export default {
 
   },
   onShow(){
-     this.matchSpeedAfterAppear()
+     // this.matchSpeedAfterAppear()
+     this.challengeShow=true;
 
 
+     
   },
   onUnload(){
      this.clearDefault()
+
+
+  },
+  onReady(){
+    // 使用 wx.createContext 获取绘图上下文 context
+ 
   }
 }
 

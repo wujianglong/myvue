@@ -43,7 +43,7 @@ export default {
               //服务器用AnswerContent 和 AnswerType对象
               answers: [
               {
-                  title: 'n.m',
+                  title: 'n.m0',
                   type: 1 //correct
               },
               {
@@ -70,7 +70,7 @@ export default {
               //服务器用AnswerContent 和 AnswerType对象
               answers: [
               {
-                  title: 'n.m',
+                  title: 'n.m1',
                   type: 1 //correct
               },
               {
@@ -97,7 +97,7 @@ export default {
               //服务器用AnswerContent 和 AnswerType对象
               answers: [
               {
-                  title: 'n.m',
+                  title: 'n.m2',
                   type: 1 //correct
               },
               {
@@ -124,7 +124,7 @@ export default {
               //服务器用AnswerContent 和 AnswerType对象
               answers: [
               {
-                  title: 'n.m',
+                  title: 'n.m3',
                   type: 1 //correct
               },
               {
@@ -151,7 +151,7 @@ export default {
               //服务器用AnswerContent 和 AnswerType对象
               answers: [
               {
-                  title: 'n.m',
+                  title: 'n.m4',
                   type: 1 //correct
               },
               {
@@ -178,7 +178,7 @@ export default {
               //服务器用AnswerContent 和 AnswerType对象
               answers: [
               {
-                  title: 'n.m',
+                  title: 'n.m5',
                   type: 1 //correct
               },
               {
@@ -205,7 +205,7 @@ export default {
               //服务器用AnswerContent 和 AnswerType对象
               answers: [
               {
-                  title: 'n.m',
+                  title: 'n.m6',
                   type: 1 //correct
               },
               {

@@ -1,11 +1,12 @@
 <template>
-     <div class="wordCard" :class="wordCardBindClass">
-          <div>
-            {{count}}
+     <div class="wordCard" :class="wordCardBindClass"  @animationend="wordEndChange">
+          <div class="canvasCircle">
+              <div>4</div>
+              <canvas style="width: 140rpx; height: 140rpx;" canvas-id="firstCanvas"></canvas>
           </div>
           <div>
               <div class="word t_a">
-                       bad
+                      {{data.word}}
               </div>
               <div class="combe">
                      <em>COMBE x6</em>
@@ -18,7 +19,7 @@
               <div class="option t_a">
                      <ul>
                           <!-- 不包括当前点击的对象 -->
-                          <li v-for="(item,index) in data" :class="[(clickFlag&&index==select)&&(item.type==1?'selectCorrent showLi':'selectWrong showLi'),((index!=select)&&clickFlag)&&(item.type==1?'selectCorrent showLi1':'hideLi')]" @click="selectFnc($event,index)">
+                          <li v-for="(item,index) in data.answers" :class="[(clickFlag&&index==select)&&(item.type==1?'selectCorrent showLi':'selectWrong showLi'),((index!=select)&&clickFlag)&&(item.type==1?'selectCorrent showLi1':'hideLi')]" @click="selectFnc($event,index)">
                               {{item.title}}
                           </li>
                      </ul>
@@ -31,17 +32,42 @@
 export default {
   props: ['classNames','optionData'],
   data(){
-       return {
-              data:this.optionData.answers,
-              correntSelect:2,
-              select:-1,
-              wordCardBindClass:this.classNames,
-              clickFlag:false,
-              clickCount:0
-       }
+     return {
+        data:this.optionData,
+        correntSelect:2,
+        select:-1,
+        wordCardBindClass:this.classNames,
+        clickFlag:false,
+        clickCount:0,
+        timeOut:null,
+        interval:null
+     }
   },
   computed:{
     
+  },
+  created(){
+          var context = wx.createCanvasContext('firstCanvas')
+          
+          var i = 0;
+          var interval = setInterval(function() {
+              i++;
+              if (i >= 100) {
+                  clearInterval(interval)
+              }
+              render(context, 100, 4, i);
+          }, 50)
+
+          function render(context, length, r, i){
+              context.clearRect(0, 0, length, length);
+              context.beginPath();
+              context.setStrokeStyle("#F5A623")
+              context.setLineWidth(r)
+              context.arc(35.5, 35, 28, -0.5 * Math.PI + i * 0.02 * Math.PI,-0.5 * Math.PI, false);
+              context.stroke();
+              context.closePath();
+              context.draw()
+          }
   },
   methods:{
        classFnc(item,index){
@@ -53,25 +79,33 @@ export default {
         this.select=i;
         console.log(e.currentTarget.dataset.eventid)
 
-        this.$parent.emit11()
+        this.$parent.dataUpdate()
 
         setTimeout(()=>{
-          this.clickFlag=false;
-        },1000)
-
+            this.clickFlag=false;
+        },3000)
+       },
+       wordEndChange(){
+          console.log("11endchange")
+          this.countDown()
+       },
+       countDown(){
+         
        }
   },
   watch:{
       classNames(curVal,oldVal){
-
-        this.wordCardBindClass=oldVal;
+        this.wordCardBindClass=curVal;
         console.log(curVal)
-
-        console.log(oldVal)
+     },
+     optionData(curVal,oldVal){
+        this.data=curVal;
+        console.log("ee")
      }
   }
 }
 </script>
+<!-- 同时用transition 与 animation  是因为元素有两个动画  我只希望监听动画结束的时候调用一次就就行了 不希望触发两次 -->
 <style scoped lang="scss">
 .wordCard{
        background: #FAFAFA;
@@ -81,14 +115,36 @@ export default {
        position:absolute;
        top:0;
        width:100%;
+       z-index:999;
        >div{
            padding-left:40rpx;
            padding-right:40rpx;
        }
+       .canvasCircle{
+          width:140rpx;
+          height:140rpx;
+          border-radius:120rpx;
+          padding-left:0;
+          padding-right:0;
+          position:relative;
+          left:50%;
+          margin-left:-60rpx;
+          margin-top:-60rpx;
+          background:#fff;
+          >div{
+            position:absolute;
+            width:100%;
+            line-height:140rpx;
+            text-align:center;
+            color:#F5A623;
+            font-size:24px;
+            font-weight:bold;
+          }
+       }
        .word{
               font-size: 60rpx;
               color: #2A1749;
-              padding-top:60rpx;
+              padding-top:10rpx;
        }
        .combe{
               width:268rpx;
@@ -108,16 +164,16 @@ export default {
               color: #7E7E7E;
        }
        .option{
-              ul{
-                     li{
-                            height:100rpx;
-                            line-height:100rpx;
-                            width:100%;
-                            background: #EDEDED;
-                            border-radius: 100px;
-                            margin-top:40rpx;
-                     }
-              }
+            ul{
+                 li{
+                      height:100rpx;
+                      line-height:100rpx;
+                      width:100%;
+                      background: #EDEDED;
+                      border-radius: 100px;
+                      margin-top:40rpx;
+                 }
+            }
        }
 }
 .left0{
@@ -133,8 +189,8 @@ export default {
 }
 
 .option1{
-  animation:option1 2s 1;
-  animation-fill-mode: forwards;
+  opacity:0;
+
 }
 
 .option2{
@@ -142,7 +198,31 @@ export default {
   animation-fill-mode: forwards;
 }
 
+
 @keyframes option1{
+  0%{
+      opacity:1;
+      z-index:9999;
+  }
+
+  100%{
+      opacity:0;
+      z-index:-1;
+  }
+}
+
+@keyframes option2{
+  0%{
+      opacity:0;
+      z-index:-1;
+  }
+  100%{
+      opacity:1;
+      z-index:9999;
+  }
+}
+
+@keyframes option3{
   0%{
       left:0;
       opacity:1;
@@ -156,7 +236,7 @@ export default {
   }
 }
 
-@keyframes option2{
+@keyframes option4{
   0%{
       opacity:0;
   }
