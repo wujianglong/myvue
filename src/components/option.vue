@@ -1,5 +1,5 @@
 <template>
-     <div class="wordCard" :class="wordCardBindClass"  @animationend="wordEndChange">
+     <div class="wordCard" :class="wordCardBindClass"  @animationend="wordEndChange" @animationstart="wordStartChange">
           <div class="canvasCircle">
               <div>4</div>
               <canvas style="width: 140rpx; height: 140rpx;" canvas-id="firstCanvas"></canvas>
@@ -14,7 +14,7 @@
               <div class="questionProgress clear">
                      <span class="f_l">请选择该单词阴阳性</span>
                      <span>{{msg}}</span>
-                     <span class="f_r">4/10</span>
+                     <span class="f_r">{{clickCount}}/10</span>
               </div>
               <div class="option t_a">
                      <ul>
@@ -40,34 +40,15 @@ export default {
         clickFlag:false,
         clickCount:0,
         timeOut:null,
-        interval:null
+        interval:null,
+        countDownFlag:false
      }
   },
   computed:{
     
   },
   created(){
-          var context = wx.createCanvasContext('firstCanvas')
-          
-          var i = 0;
-          var interval = setInterval(function() {
-              i++;
-              if (i >= 100) {
-                  clearInterval(interval)
-              }
-              render(context, 100, 4, i);
-          }, 50)
 
-          function render(context, length, r, i){
-              context.clearRect(0, 0, length, length);
-              context.beginPath();
-              context.setStrokeStyle("#F5A623")
-              context.setLineWidth(r)
-              context.arc(35.5, 35, 28, -0.5 * Math.PI + i * 0.02 * Math.PI,-0.5 * Math.PI, false);
-              context.stroke();
-              context.closePath();
-              context.draw()
-          }
   },
   methods:{
        classFnc(item,index){
@@ -79,19 +60,68 @@ export default {
         this.select=i;
         console.log(e.currentTarget.dataset.eventid)
 
+
         this.$parent.dataUpdate()
+        clearInterval(this.interval)
 
         setTimeout(()=>{
             this.clickFlag=false;
         },3000)
        },
        wordEndChange(){
-          console.log("11endchange")
+        this.countDownFlag=false;
+       },
+       wordStartChange(){
           this.countDown()
+          setTimeout(()=>{
+              this.countDownFlag=true
+          },1000)
        },
        countDown(){
-         
+          let _self=this;
+              var context = wx.createCanvasContext('firstCanvas')
+              render(context, 100, 4, 100);
+
+              var i = 0;
+              _self.interval = setInterval(function() {
+                  if(!_self.countDownFlag){return false;}
+                  i++;
+                  if (i >= 80) {
+                      clearInterval(_self.interval)
+                  }
+                  render(context, 100, 4, i);
+              }, 50)
+
+              function render(context, length, r, i){
+                  context.clearRect(0, 0, length, length);
+                  context.beginPath();
+                  context.setStrokeStyle("#F5A623")
+                  context.setLineWidth(r)
+                  context.arc(35.5, 35, 28, -0.5 * Math.PI + i * 0.02 * Math.PI,-0.5 * Math.PI, false);
+                  context.stroke();
+                  context.closePath();
+                  context.draw()
+              }
+
+
+       },
+       canvasShow(){
+          let _self=this;
+          var context = wx.createCanvasContext('firstCanvas')
+
+          render(context, 100, 4, 100)
+          function render(context, length, r, i){
+              context.clearRect(0, 0, length, length);
+              context.beginPath();
+              context.setStrokeStyle("#F5A623")
+              context.setLineWidth(r)
+              context.arc(35.5, 35, 28, -0.5 * Math.PI + i * 0.02 * Math.PI,-0.5 * Math.PI, false);
+              context.stroke();
+              context.closePath();
+              context.draw()
+          }
        }
+
   },
   watch:{
       classNames(curVal,oldVal){
