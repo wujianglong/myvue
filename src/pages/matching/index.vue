@@ -1,6 +1,6 @@
 <template>
     <div id="matching" class="container">
-        <challenge v-if="challengeShow"></challenge>
+        <challenge  v-if="challengeShow"></challenge>
         <div id="matching" v-else>
             <div>
                 <div class="matchSpeed" :class="{matchSpeedActive:active.matchSpeedActive}">
@@ -58,7 +58,8 @@ export default {
         infoActive:false,
       },
       interval:null,
-      challengeShow:false
+      challengeShow:false,
+      unload:false
     }
   },
   components:{
@@ -119,9 +120,10 @@ export default {
       },
       //用户信息出来动画跳转
       challengeInfoEnd(){
+        let _self=this;
         this.matchIngAchieve=true
         setTimeout(()=>{
-           this.challengeShow=true;
+           _self.challengeShow=true;
         },500)
       }
       
@@ -129,18 +131,18 @@ export default {
   mounted(){
 
   },
+  onLoad(){
+    this.unload=false;
+  },
   onShow(){
      // this.matchSpeedAfterAppear()
      this.challengeShow=true;
+     // this.$options.components.challenge.methods.wjl()
 
-     
-
-     
   },
   onUnload(){
      this.clearDefault()
-
-
+     this.unload=true;
   },
   onReady(){
     // 使用 wx.createContext 获取绘图上下文 context

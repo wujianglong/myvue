@@ -14,7 +14,7 @@
        				 	   	   Macbeth
        				 	   </p>
        				 	   <p class="score">
-       				 	   	   30<span>分</span>
+       				 	   	   {{userScore}}<span>分</span>
        				 	   </p>
        				 </div>
        			</div>
@@ -24,7 +24,7 @@
        				 	   	   Macbeth
        				 	   </p>
        				 	   <p class="score">
-       				 	   	   30<span>分</span>
+       				 	   	   {{enemyScore}}<span>分</span>
        				 	   </p>
        				 </div>
        				 <div class="portrait">
@@ -43,7 +43,7 @@ import optionSelect from '@/components/option1'
 export default {
    name: 'challenge',
    created(){
-   		 this.data=this.$root.$mp.appOptions.globalData.word_info[0]
+   		 this.data=global.baseInfo.word_info[0]
    },
    components: {
     	optionSelect
@@ -54,28 +54,50 @@ export default {
    	  	progressFlag:false,
    	  	option:"",
    	  	clickCount:0,
-   	  	setTimeout:null
+   	  	setTimeout:null,
+   	  	userScore:0,
+   	  	enemyScore:0,
+   	  	userScoreList:[],
+   	  	enemyScoreList:[]
    	  }
    },
    methods : {
-   	 
+   	  scoreUpdate(l){	
+   	  		let _self=this;
+   	  		this.userScoreList.push(l)
+
+   	  		this.enemyScoreList=global.baseInfo.word_info.map((o,i)=>{
+   	  			if(o.answers[o.enemy_selection].type==o.enemy_selection){
+   	  				return 1;
+   	  			}else{
+   	  				return 0;
+   	  			}
+   	  		}).slice(0,this.userScoreList.length)
+
+
+   	  		let userNum=0;
+   	  		this.userScoreList.forEach(function(o,i){
+			   if(o==1){
+			   		userNum+=o;
+			   }
+			})
+
+   	  		let enemyNum=0;
+   	  		this.enemyScoreList.forEach(function(o,i){
+			   	enemyNum+=o;
+			})
+   	  		
+   	  		this.userScore=userNum;
+   	  		this.enemyScore=enemyNum;
+   	  },
    	  dataUpdate(){
    	  	this.clickCount++;
-   	  	if(this.clickCount>=this.$root.$mp.appOptions.globalData.word_info.length){
-   	  		alert("没了")
-   	  		console.log("没了")
-   	  	}else{
-   	  		this.data=this.$root.$mp.appOptions.globalData.word_info[this.clickCount]
 
-   	  	}
-	   	
+   	  		this.data=global.baseInfo.word_info[this.clickCount]
       }
    },
    mounted(){
-      console.log(this.$root.$mp.appOptions.globalData.degree_difficulty)
-   	 
-
-
+      console.log(global.baseInfo.degree_difficulty)
 
    	  //兼容 延迟才有动画
    	  setTimeout(()=>{
@@ -83,8 +105,6 @@ export default {
    	  },100)
 
    	  //有开始提示后 开始倒计时条
-   	  
-
 
    	  //倒计时正反方向()
   //  	  setTimeout(()=>{

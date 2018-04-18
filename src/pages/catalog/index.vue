@@ -91,6 +91,8 @@ export default {
    	  matchingLink(){
    	  	  let r=+new Date()
    	      const url="../matching/main?"+r;
+
+   	      
    	      wx.navigateTo({ url })
    	  }
    },

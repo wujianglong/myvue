@@ -19,7 +19,7 @@
               <div class="option t_a">
                      <ul>
                           <!-- 不包括当前点击的对象 -->
-                          <li v-for="(item,index) in data.answers" :class="[(clickFlag&&index==select)&&(item.type==1?'selectCorrent showLi':'selectWrong showLi'),((index!=select)&&clickFlag)&&(item.type==1?'selectCorrent showLi1':'hideLi')]" @click="selectFnc($event,index)">
+                          <li v-for="(item,index) in data.answers" :class="[(clickFlag&&index==select)&&(item.type==1?'selectCorrent showLi':'selectWrong showLi'),((index!=select)&&clickFlag)&&(item.type==1?'selectCorrent showLi1':'hideLi')]" @click="selectFnc($event,index,item)">
                               {{item.title}}
                           </li>
                      </ul>
@@ -38,7 +38,7 @@ export default {
         select:-1,
         wordCardBindClass:this.classNames,
         clickFlag:false,
-        clickCount:0,
+        clickCount:1,
         timeOut:null,
         interval:null,
         countDownFlag:false,
@@ -61,7 +61,7 @@ export default {
        classFnc(item,index){
 
        },
-       selectFnc(e,i){
+       selectFnc(e,i,item){
        //清除canvas  进度
         let _self=this;
         clearInterval(this.interval)
@@ -71,8 +71,22 @@ export default {
         //点击选中高亮
         this.select=i;
 
+        if(!item){
+          this.$parent.scoreUpdate(0)
+        }
+        else{
+          this.$parent.scoreUpdate(item.type)
+        }
+
         //更新数据  切换动画
         setTimeout(()=>{
+            if(this.clickCount>=global.baseInfo.word_info.length){
+              //所有的题目都答完
+              wx.redirectTo({
+                url: '../result/main'
+              })
+              return false;
+            }
             _self.countDown()
             this.$parent.dataUpdate()
             this.clickFlag=false;
@@ -80,39 +94,41 @@ export default {
         },2000)
        },
        countDown(){
+          //创建  倒计时的canvas
           let _self=this;
-              _self.countDownFlag=false;
-              var context = wx.createCanvasContext('firstCanvas')
-              render(context, 100, 4, 100);
-              setTimeout(()=>{
-                  _self.countDownFlag=true;
-              },1000)
-              
-              var i = 0;
-              _self.interval = setInterval(function() {
-                  if(!_self.countDownFlag){return false;}
-                  i++;
-                  if (i >= 100) {
-                      //i=200;
-                      _self.second=0;
-                      clearInterval(_self.interval)
-                      _self.selectFnc()
-                  }else{
-                      _self.second=5-Math.floor(i/20)
-                  }
-                  render(context, 100, 4, i);
-              }, 50)
-
-              function render(context, length, r, i){
-                  context.clearRect(0, 0, length, length);
-                  context.beginPath();
-                  context.setStrokeStyle("#F5A623")
-                  context.setLineWidth(r)
-                  context.arc(35.5, 35, 28, -0.5 * Math.PI + i * 0.02 * Math.PI,-0.5 * Math.PI, false);
-                  context.stroke();
-                  context.closePath();
-                  context.draw()
+          _self.countDownFlag=false;
+          var context = wx.createCanvasContext('firstCanvas')
+          render(context, 100, 4, 100);
+          setTimeout(()=>{
+              _self.countDownFlag=true;
+          },1000)
+          
+          var i = 0;
+          clearInterval(_self.interval)
+          _self.interval = setInterval(function() {
+              if(!_self.countDownFlag){return false;}
+              i++;
+              if (i >= 100) {
+                  //i=200;
+                  _self.second=0;
+                  clearInterval(_self.interval)
+                  _self.selectFnc()
+              }else{
+                  _self.second=5-Math.floor(i/20)
               }
+              render(context, 100, 4, i);
+          }, 50)
+
+          function render(context, length, r, i){
+              context.clearRect(0, 0, length, length);
+              context.beginPath();
+              context.setStrokeStyle("#F5A623")
+              context.setLineWidth(r)
+              context.arc(35.5, 35, 28, -0.5 * Math.PI + i * 0.02 * Math.PI,-0.5 * Math.PI, false);
+              context.stroke();
+              context.closePath();
+              context.draw()
+          }
        },
        canvasShow(){
           let _self=this;
@@ -130,7 +146,6 @@ export default {
               context.draw()
           }
        }
-
   },
   watch:{
       classNames(curVal,oldVal){
