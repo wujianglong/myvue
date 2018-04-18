@@ -90,7 +90,8 @@ export default {
             _self.countDown()
             this.$parent.dataUpdate()
             this.clickFlag=false;
-            this.clickCount++
+            this.clickCount++;
+            this.second=5;
         },2000)
        },
        countDown(){
@@ -106,6 +107,8 @@ export default {
           var i = 0;
           clearInterval(_self.interval)
           _self.interval = setInterval(function() {
+              if(_self.$root.$data.unload){clearInterval(_self.interval);return false;}
+
               if(!_self.countDownFlag){return false;}
               i++;
               if (i >= 100) {

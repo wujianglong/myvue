@@ -138,7 +138,7 @@ export default {
      // this.matchSpeedAfterAppear()
      this.challengeShow=true;
      // this.$options.components.challenge.methods.wjl()
-
+     this.unload=false
   },
   onUnload(){
      this.clearDefault()

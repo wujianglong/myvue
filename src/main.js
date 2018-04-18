@@ -16,11 +16,8 @@ export default {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#3B337C',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: '#fff'
+      navigationBarTextStyle: '#fff',
+      disableScroll: false
     }
-  },
-  globalData:{
-    name:"wjl"
   }
-
 }
