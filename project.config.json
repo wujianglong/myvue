@@ -60,6 +60,12 @@
 					"name": "result",
 					"pathName": "pages/result/main",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "bookList",
+					"pathName": "pages/bookList/main",
+					"query": ""
 				}
 			]
 		}
